@@ -21,11 +21,7 @@ class ReadMovie:
                     flame = cv2.resize(flame, None, None, self.size, self.size)
                 flames.append( flame)
                 if index == 1:
-                    print(type(flames[index]))
-                    print(type(flame))
                     mergeImg = np.hstack((flame, flames[index]))
-                    cv2.imshow('Image', flames[index])
-                    cv2.waitKey()
                 index = index + 1
             else :
                 break

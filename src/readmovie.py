@@ -18,7 +18,7 @@ class ReadMovie:
 
             if ret:
                 if self.size != None:
-                    flame = cv2.resize(flame, None, None, self.size, self.size)
+                    flame = cv2.resize(flame, (432, 324))
                 flames.append( flame)
                 if index == 1:
                     mergeImg = np.hstack((flame, flames[index]))

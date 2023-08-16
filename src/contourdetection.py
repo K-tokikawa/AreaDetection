@@ -22,6 +22,29 @@ for pathcl in clipping:
         # 白以外にマスク
         mask_white = cv2.inRange(img_HSV, lower_white, upper_white)
         res_white = cv2.bitwise_and(img,img, mask= mask_white)
-    
-        cv2.imshow('window', res_white)
+        img_ = cv2.cvtColor(res_white, cv2.COLOR_HSV2BGR)
+
+        gray = cv2.cvtColor(img_, cv2.COLOR_BGR2GRAY)
+        ret, thresh = cv2.threshold(gray, 70, 255, cv2.THRESH_BINARY)
+        ret, thresh = cv2.threshold(gray, 70, 255, cv2.THRESH_BINARY)
+        thresh = 255 - thresh
+        contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+        # 輪郭を画像に書き込む
+        output = cv2.drawContours(img, contours, -1, (0,255,0), 3)
+
+        cv2.imshow('window', output)
         cv2.waitKey(0)
+        # # 画像のグレースケール化
+        # gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        # # 画像の白黒2値化
+        # ret, thresh = cv2.threshold(gray, 130, 255, cv2.THRESH_BINARY)
+
+        # # 輪郭を抽出する
+        # contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+        # # 輪郭を画像に書き込む
+        # output = cv2.drawContours(img, contours, -1, (0,255,0), 2)
+        # cv2.imshow('window', output)
+        # cv2.waitKey(0)
